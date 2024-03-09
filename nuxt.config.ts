@@ -1,37 +1,29 @@
-import vuetify from "vite-plugin-vuetify";
+import vuetify from "vite-plugin-vuetify"
 
-// PWA Config
-const title = "Vuetify 3 + Nuxt 3 Starter";
-const shortTitle = "Vuetify 3 + Nuxt 3 Starter";
-const description = "Template to get you up and running with Nuxt 3 & Vuetify 3";
-const image = "https://vuetify3nuxt3starter.behonbaker.com/starter.png";
-const url = "https://vuetify3nuxt3starter.behonbaker.com/";
+const title = "Vue games"
+const description = "Short browser games you can play."
+const image = ""
+const url = ""
 
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  // import styles
-  css: ["@/assets/main.scss"],
   devtools: { enabled: true },
-  // enable takeover mode
   typescript: { shim: false },
   build: { transpile: ["vuetify"] },
   modules: [
     "@kevinmarrec/nuxt-pwa",
     async (options, nuxt) => {
       nuxt.hooks.hook("vite:extendConfig", (config) => {
-        config.plugins ||= [];
-        config.plugins.push(vuetify());
-      });
+        config.plugins ||= []
+        config.plugins.push(vuetify())
+      })
     },
   ],
 
   app: {
     head: {
-      title: "Vuetify 3 + Nuxt 3 Starter",
-      titleTemplate: "%s | Vuetify 3 + Nuxt 3 Starter",
+      title,
+      titleTemplate: `%s | ${title}`,
       link: [
-        { rel: "stylesheet", href: "https://rsms.me/inter/inter.css" },
-        { rel: "preconnect", href: "https://rsms.me/" },
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: url },
       ],
@@ -68,7 +60,6 @@ export default defineNuxtConfig({
           property: "og:image",
           content: image,
         },
-        //Twitter
         { name: "twitter:card", content: "summary_large_image" },
         {
           hid: "twitter:url",
@@ -93,19 +84,18 @@ export default defineNuxtConfig({
       ],
     },
   },
-
   pwa: {
     meta: {
-      name: shortTitle,
-      author: "Behon Baker",
-      theme_color: "#4f46e5",
+      name: title,
+      author: "dariadia",
+      theme_color: "#ACB1D6",
       description: description,
     },
     manifest: {
-      name: shortTitle,
-      short_name: shortTitle,
-      theme_color: "#4f46e5",
+      name: title,
+      short_name: title,
+      theme_color: "#ACB1D6",
       description: description,
     },
   },
-});
+})
