@@ -1,10 +1,32 @@
-import '@mdi/font/css/materialdesignicons.css'
-
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
+import { createVuetify } from "vuetify";
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
-  })
-  app.vueApp.use(vuetify)
-})
+    ssr: true,
+    defaults,
+    // add theme
+    theme: {
+      defaultTheme: LIGHT_THEME,
+      themes: {
+        light,
+        dark,
+      },
+      // add color variations
+      //   variations: {
+      //     colors: ["primary", "secondary"],
+      //     lighten: 3,
+      //     darken: 3,
+      //   },
+    },
+    // Add the custom iconset
+    icons: {
+      defaultSet: "custom",
+      aliases,
+      sets: {
+        custom,
+      },
+    },
+  });
+
+  app.vueApp.use(vuetify);
+});
