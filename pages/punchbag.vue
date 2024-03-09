@@ -1,70 +1,28 @@
 <template>
-  <div id="bag" v-bind:class="{ burst: ended }"></div>
+  <v-file-input prepend-icon="mdi-camera" label="File input" accept="image/*" v-model="image" variant="solo-filled"></v-file-input>
+  <div id="bag" :class="{ burst: isGameOn }"></div>
   <div id="bag-health">
-    <div v-bind:style="{ width: health + '%' }"></div>
+    <div :style="{ width: health + '%' }"></div>
   </div>
   <div id="controls">
-    <button v-on:click="punch" v-show="!ended">Punch</button>
-    <button v-on:click="restart">Restart</button>
+    <button @click="punch" v-show="!ended">Punch</button>
+    <button @click="restart">Restart</button>
   </div>
 </template>
 
-<style>
-#bag {
-  width: 200px;
-  height: 500px;
-  margin: 0 auto;
-  background: url(/img/bag.png) center no-repeat;
-  background-size: 80%;
+<script setup>
+const health = ref(100)
+const image = ref("")
+
+const isGameOn = computed(() => Boolean(image))
+console.log(image)
+
+const punch = () => {
+  health -= 10
+  if (health <= 0) isGameOn = false
 }
-
-#bag.burst {
-  background-image: url(/img/bag-burst.png);
+const restart = () => {
+  health = 100
+  image = ""
 }
-
-#bag-health {
-  width: 200px;
-  border: 2px solid #000;
-  margin: 0 auto 20px auto;
-}
-
-#bag-health div {
-  height: 20px;
-  background: crimson
-}
-
-#controls {
-  width: 120px;
-  margin: 0 auto;
-}
-</style>
-
-<script>
-export default {
-  data: {
-    health: 100,
-    ended: false
-  }
-
-  ,
-  methods: {
-    punch: function () {
-      this.health -= 10;
-
-      if (this.health <= 0) {
-        this.ended = true;
-      }
-    }
-
-    ,
-    restart: function () {
-      this.health = 100;
-      this.ended = false;
-    }
-  }
-
-  ,
-  computed: {}
-}
-
 </script>
